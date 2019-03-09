@@ -17,12 +17,12 @@ public class Game {
         
         if(playerExists) {
         	System.out.println("Welcome back " + playerName + "!");
-        	System.out.println("Your balance is: " + "€");
-    		//Player.setBalance(balance);
+        	System.out.println("Your balance is: " + Player.getBalance() + "€");
         }
         else {
         	System.out.println("Welcome, " + playerName + "!");
-        	System.out.println("Your balance is: 100€");
+        	Player.setBalance(100);
+        	System.out.println("Your balance is: " + Player.getBalance() + "€");
         }
     }
 
@@ -36,12 +36,19 @@ public class Game {
 
     public void startGame() {
         Scanner sc = new Scanner(System.in);
-        while (sc.nextLine() != "stop") {
-            //
-        }
-        if(sc.nextLine() == "save") {
-        	JSONUtils.savePlayer(playerName);
+        System.out.println("Set a bet by typing in a number and 'play' to start the game");
+        while (true) {
+        	if(sc.nextLine() == "save") {
+        		JSONUtils.savePlayer(Player.getPlayerName(),Player.getBalance());
+        	if(sc.nextLine() != "stop") {
+        		// pysäytä peli jos erä on loppu
+        		System.out.println("Stopped");
+        	}
+        	if(sc.nextLine() != "play") {
+        		System.out.println("Round begins");
+        	}
         }
     }
 
+}
 }

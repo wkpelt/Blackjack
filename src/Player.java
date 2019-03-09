@@ -8,19 +8,19 @@ public class Player {
 	private int balance;
 	
 	//* getit ja setit
-	public String givePlayerName() {
+	public String getPlayerName() {
         return name;
     }
 	
-	public int giveBalance() {
+	public int getBalance() {
         return balance;
     }
 	
-	public void setBalance(balance) {
+	public void setBalance(int balance) {
 		this.balance = balance;
 	}
 	
-	public void setPlayerName(name) {
+	public void setPlayerName(String name) {
 		this.name = name;
 	}
 	
@@ -31,7 +31,7 @@ public class Player {
 	public Player(String aName) {
 		this.name = aName;
 		hand.clear();
-		}
+	}
 	
 	//* Lis‰‰ kortti k‰teen metodi
 	public boolean addCard(Card aCard) {

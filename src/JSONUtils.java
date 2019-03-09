@@ -17,10 +17,14 @@ public class JSONUtils {
 		return new JSONObject(getJSONStringFromFile(path));
 	}
 	
-	public static void savePlayer(String playerName) {
+	public static void savePlayer(String playerName, int balance) {
 		JSONObject obj = JSONUtils.getJSONObjectFromFile("/players.json");
 		if(!JSONUtils.objectExists(playerName)) {
-			//obj.put(playerName, player.getBalance)
+			obj.put(playerName, balance);
+		}
+		else {
+			JSONObject player = obj.getJSONObject(playerName);
+			player.put(playerName, balance)
 		}
 	}
 	

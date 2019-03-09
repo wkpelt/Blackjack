@@ -14,15 +14,18 @@ public class Game {
     
     public void ifPlayerExists() {
         boolean playerExists = JSONUtils.objectExists(playerName);
+        
         if(playerExists) {
         	System.out.println("Welcome back " + playerName + "!");
+        	System.out.println("Your balance is: " + "€");
         }
         else {
         	System.out.println("Welcome, " + playerName + "!");
+        	System.out.println("Your balance is: 100€");
         }
     }
 
-    public String givePlayerName() {
+	public String givePlayerName() {
         return playerName;
     }
 

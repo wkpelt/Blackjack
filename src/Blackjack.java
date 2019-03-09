@@ -6,7 +6,8 @@ class Blackjack {
 
         String playerName;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nimenne?");
+        System.out.println("Blackjack");
+        System.out.println("What is your name?");
         playerName = sc.nextLine();
         Game Game = new Game(playerName);
         Game.startGame();

@@ -20,10 +20,15 @@ public class JSONUtils {
 	public static boolean objectExists(String key) {
 		try {
 	        JSONObject obj = JSONUtils.getJSONObjectFromFile("/players.json");
-	        String[] names = JSONObject.getNames(obj);
-	        for(String string : names) {
-	        	//System.out.println(obj.get(string));
-	        	if (obj.get(string).equals(key)) {
+	        String[] players = JSONObject.getNames(obj);
+	        
+	        for(String name : players) {
+	        	if (name.equals(key)) {
+	        		int balance = obj.getInt(key);
+	        		//System.out.println(balance);
+	        		
+	        		//Player.setBalance(balance);
+	        		
 	        		return true;
 	        	}
 	        }

@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Deck {
 	
-	ArrayList<Card> deck;
+	public ArrayList<Card> deck;
 	
 	
 	public Deck() {
@@ -14,6 +14,20 @@ public class Deck {
 	public void createDeck() {
 		ArrayList<Card> deck = new ArrayList<Card>();
 		
+		//*adds four decks
+		for (int i=0; i < 4; i++) {
+			//* adds a single decks worth of cards
+			for (Suit s: Suit.values()) {
+				for(Rank r : Rank.values()) {
+					deck.add(new Card(r,s));
+				}
+			}
+		}
+		shuffle();
+	}
+	
+	public void reShuffle() {
+		deck.removeAll(deck);
 		//*adds four decks
 		for (int i=0; i < 4; i++) {
 			//* adds a single decks worth of cards

@@ -17,14 +17,20 @@ public class JSONUtils {
 		return new JSONObject(getJSONStringFromFile(path));
 	}
 	
-	public static boolean objectExists(JSONObject jsonObjects, String key) {
-		Object o;
+	public static boolean objectExists(String key) {
 		try {
-			o = JSONObject.getNames(key);
+	        JSONObject obj = JSONUtils.getJSONObjectFromFile("/players.json");
+	        String[] names = JSONObject.getNames(obj);
+	        for(String string : names) {
+	        	//System.out.println(obj.get(string));
+	        	if (obj.get(string).equals(key)) {
+	        		return true;
+	        	}
+	        }
+	        return false;
 		}
 		catch(Exception e){
 			return false;
 		}
-		return o != null;
 	}
 }

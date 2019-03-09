@@ -24,7 +24,7 @@ public class JSONUtils {
 		}
 		else {
 			JSONObject player = obj.getJSONObject(playerName);
-			player.put(playerName, balance)
+			player.put(playerName, balance);
 		}
 	}
 	
@@ -53,11 +53,6 @@ public class JSONUtils {
 	        
 	        for(String name : players) {
 	        	if (name.equals(key)) {
-	        		int balance = obj.getInt(key);
-	        		//System.out.println(balance);
-	        		
-	        		//Player.setBalance(balance);
-	        		
 	        		return true;
 	        	}
 	        }

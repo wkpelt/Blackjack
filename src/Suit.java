@@ -1,0 +1,1 @@
+public enum Suit {HEARTS("Hearts"), DIAMONDS("Spades"), SPADES("Diamonds"), CLUBS("Clubs")}

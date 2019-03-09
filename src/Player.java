@@ -4,6 +4,26 @@ public class Player {
 	//* pelaajan nimi
 	private String name;
 	
+	//* pelaajan massit
+	private int balance;
+	
+	//* getit ja setit
+	public String givePlayerName() {
+        return name;
+    }
+	
+	public int giveBalance() {
+        return balance;
+    }
+	
+	public void setBalance(balance) {
+		this.balance = balance;
+	}
+	
+	public void setPlayerName(name) {
+		this.name = name;
+	}
+	
 	//* pelaajan käsi
 	private ArrayList<Card> hand;
 	
@@ -26,7 +46,7 @@ public class Player {
 		int numAces = 0;
 		
 		for (int c = 0; c < hand.size(); c++) {
-			cardRank = hand(c).getValue();
+			cardRank = ((hand.get(c)).getRank()).getRankValue();
 			
 			if (cardRank == 1) {
 				numAces++;

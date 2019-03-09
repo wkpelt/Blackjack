@@ -17,6 +17,31 @@ public class JSONUtils {
 		return new JSONObject(getJSONStringFromFile(path));
 	}
 	
+	public static void savePlayer(String playerName) {
+		JSONObject obj = JSONUtils.getJSONObjectFromFile("/players.json");
+		if(!JSONUtils.objectExists(playerName)) {
+			//obj.put(playerName, player.getBalance)
+		}
+	}
+	
+	public static int balanceOfPlayer(String playerName) {
+		try {
+	        JSONObject obj = JSONUtils.getJSONObjectFromFile("/players.json");
+	        String[] players = JSONObject.getNames(obj);
+	        
+	        for(String name : players) {
+	        	if (name.equals(playerName)) {
+	        		int balance = obj.getInt(playerName);
+	        		return balance;
+	        	}
+	        }
+	        return 0;
+		}
+		catch(Exception e){
+			return 0;
+		}
+	}
+	
 	public static boolean objectExists(String key) {
 		try {
 	        JSONObject obj = JSONUtils.getJSONObjectFromFile("/players.json");

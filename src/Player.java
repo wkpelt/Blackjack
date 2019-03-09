@@ -4,6 +4,26 @@ public class Player {
 	//* pelaajan nimi
 	private String name;
 	
+	//* pelaajan massit
+	private int balance;
+	
+	//* getit ja setit
+	public String givePlayerName() {
+        return name;
+    }
+	
+	public int giveBalance() {
+        return balance;
+    }
+	
+	public void setBalance(balance) {
+		this.balance = balance;
+	}
+	
+	public void setPlayerName(name) {
+		this.name = name;
+	}
+	
 	//* pelaajan käsi
 	private ArrayList<Card> hand;
 	

@@ -18,6 +18,7 @@ public class Game {
         if(playerExists) {
         	System.out.println("Welcome back " + playerName + "!");
         	System.out.println("Your balance is: " + "€");
+    		//Player.setBalance(balance);
         }
         else {
         	System.out.println("Welcome, " + playerName + "!");
@@ -37,6 +38,9 @@ public class Game {
         Scanner sc = new Scanner(System.in);
         while (sc.nextLine() != "stop") {
             //
+        }
+        if(sc.nextLine() == "save") {
+        	JSONUtils.savePlayer(playerName);
         }
     }
 

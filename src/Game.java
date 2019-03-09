@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import org.json.JSONObject;
+
 public class Game {
     protected String playerName;
     protected int round;
@@ -7,8 +9,17 @@ public class Game {
     public Game(String playerName) {
         this.playerName = playerName;
         this.round = 0;
-        CheckPlayers check = new CheckPlayers();
-        check.ifExists(playerName);
+        ifPlayerExists();
+    }
+    
+    public void ifPlayerExists() {
+        boolean playerExists = JSONUtils.objectExists(playerName);
+        if(playerExists) {
+        	System.out.println("Welcome back " + playerName + "!");
+        }
+        else {
+        	System.out.println("Welcome, " + playerName + "!");
+        }
     }
 
     public String givePlayerName() {

@@ -6,10 +6,12 @@ public class Game {
     protected String playerName;
     protected int round;
     Player player;
+    Deck deck;
 
     public Game(String playerName) {
         this.playerName = playerName;
         this.round = 0;
+        this.deck = new Deck();
         ifPlayerExists();
     }
     
@@ -42,6 +44,9 @@ public class Game {
         Scanner sc = new Scanner(System.in);
         System.out.println("Set a bet by typing in a number and 'play' to start the game");
         while (true) {
+        	//if(deck.size() <= 180) {
+        	//	deck.shuffle();
+        	//}
         	if(sc.nextLine() == "save") {
         		JSONUtils.savePlayer(player.getPlayerName(),player.getBalance());
         	if(sc.nextLine() != "stop") {
@@ -50,6 +55,7 @@ public class Game {
         	}
         	if(sc.nextLine() != "play") {
         		System.out.println("Round begins");
+        		
         	}
         }
     }

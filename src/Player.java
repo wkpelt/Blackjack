@@ -26,7 +26,7 @@ public class Player {
 		int numAces = 0;
 		
 		for (int c = 0; c < hand.size(); c++) {
-			cardRank = hand(c).getValue();
+			cardRank = ((hand.get(c)).getRank()).getRankValue();
 			
 			if (cardRank == 1) {
 				numAces++;

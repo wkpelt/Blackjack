@@ -42,7 +42,8 @@ public class Deck {
 		
 		while(deck.size() > 0) {
 			int indeksi = (int) (Math.random() * deck.size());
-			temp.add(deck.remove(indeksi));
+			temp.add(deck.get(indeksi));
+			deck.remove(indeksi);
 		}
 		
 		deck = temp;

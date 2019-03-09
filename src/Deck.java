@@ -14,28 +14,19 @@ public class Deck {
 	public void createDeck() {
 		ArrayList<Card> deck = new ArrayList<Card>();
 		
-		
-		//* adds cards of four decks
-		for (int i = 0; i < 4; i++) {
-
-			//* adds all number value cards
-			for (int j = 1; i < 10; j++) {
-				deck.add(new Card(j, Suit.HEARTS));
-				deck.add(new Card(j, Suit.DIAMONDS));
-				deck.add(new Card(j, Suit.SPADES));
-				deck.add(new Card(j, Suit.CLUBS));
+		//*adds four decks
+		for (int i=0; i < 4; i++) {
+			//* adds a single decks worth of cards
+			for (Suit s: Suit.values()) {
+				for(Rank r : Rank.values()) {
+					deck.add(new Card(r,s));
+				}
 			}
-			//* adds all picture cards
-			for (int j=0; j < 3; j++) {
-				deck.add(new Card(10, Suit.HEARTS));
-				deck.add(new Card(10, Suit.DIAMONDS));
-				deck.add(new Card(10, Suit.SPADES));
-				deck.add(new Card(10, Suit.CLUBS));
-			}
-		
 		}
-		
+		shuffle();
 	}
+		
+
 	
 	public void shuffle() {
 		ArrayList<Card> temp = new ArrayList<Card>();

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 public class Game {
     protected String playerName;
     protected int round;
+    Player player;
 
     public Game(String playerName) {
         this.playerName = playerName;
@@ -17,12 +18,15 @@ public class Game {
         
         if(playerExists) {
         	System.out.println("Welcome back " + playerName + "!");
-        	System.out.println("Your balance is: " + Player.getBalance() + "€");
+        	this.player = new Player(playerName);
+        	player.setBalance(JSONUtils.balanceOfPlayer(playerName));
+        	System.out.println("Your balance is: " + player.getBalance() + "€");
         }
         else {
         	System.out.println("Welcome, " + playerName + "!");
-        	Player.setBalance(100);
-        	System.out.println("Your balance is: " + Player.getBalance() + "€");
+        	this.player = new Player(playerName);
+        	player.setBalance(100);
+        	System.out.println("Your balance is: " + player.getBalance() + "€");
         }
     }
 
@@ -39,7 +43,7 @@ public class Game {
         System.out.println("Set a bet by typing in a number and 'play' to start the game");
         while (true) {
         	if(sc.nextLine() == "save") {
-        		JSONUtils.savePlayer(Player.getPlayerName(),Player.getBalance());
+        		JSONUtils.savePlayer(player.getPlayerName(),player.getBalance());
         	if(sc.nextLine() != "stop") {
         		// pysäytä peli jos erä on loppu
         		System.out.println("Stopped");

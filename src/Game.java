@@ -5,6 +5,7 @@ import org.json.JSONObject;
 public class Game {
     protected String playerName;
     protected int round;
+    private boolean gameNotOver;
     Player player;
     Player dealer;
     Deck deck;
@@ -53,22 +54,27 @@ public class Game {
         		System.out.println("Shuffling the deck!");
         	}
         	String playerCommand = sc.nextLine();
-        	if(playerCommand.equals("save")) {
-        		System.out.println("moi");
+        	if(playerCommand.equals("save") && !gameNotOver) {
         		JSONUtils.savePlayer(player.getPlayerName(),player.getBalance());
         	}
         	if(playerCommand.equals("stop")) {
-        		// pysäytä peli jos erä on loppu
-        		System.out.println("Stopped");
+        		this.gameNotOver = false;
+        		startGame();
         	}
         	if(playerCommand.equals("play")) {
         			this.dealer = new Player("Dealer");
+        			this.gameNotOver = true;
+        			
         			System.out.println("The round is beginning, pleace place your bet");
         			System.out.println("Your balance: " + player.getBalance());
+        			
         			int playerBet = sc.nextInt();
-        			if (playerBet > player.getBalance()) {
+        			
+        			if (playerBet > player.getBalance() || player.getBalance() == 0) {
         				System.out.println("menisit töihin :D");
+        				startGame();
         			}
+        			
         			else {
         				System.out.println("Bet accepted");
         				
@@ -90,18 +96,19 @@ public class Game {
         				
         				player.printHand();
         				
-    					System.out.println("What would you like to do?");
+    					System.out.println("\nWhat would you like to do?");
     					System.out.println("Hit, Stay, Double or Split");
         					
-        					
-    					if(sc.nextLine().equals("hit")) {
-    						player.addCard(deck.deal());
-    						player.printLast();
-    					}
+        				while(player.getHandSum() <= 21) {
+        					playerCommand = sc.nextLine();
+	        				if(playerCommand.equals("hit")) {
+	        					player.addCard(deck.deal());
+	        					player.printLast();
+	        					System.out.println("Total of: " + player.getHandSum());
+	        				}
         			}
-        			
+        		}	
         	}
         }
-
     }
 }

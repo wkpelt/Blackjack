@@ -62,29 +62,46 @@ public class Game {
         		System.out.println("Stopped");
         	}
         	if(playerCommand.equals("play")) {
-        		this.dealer = new Player("Dealer");
-        		System.out.println("The round is beginning set your bet");
-        		int playerBet = sc.nextInt();
-        		
-        		player.addCard(deck.deal());
-        		System.out.println("You get");
-        		player.printLast();
-        		
-        		
-        		dealer.addCard(deck.deal());
-        		System.out.println("Dealer gets");
-        		dealer.printLast();
-        		
-        		player.addCard(deck.deal());
-        		System.out.println("You get");
-        		player.printLast();
-        		
-        		dealer.addCard(deck.deal());
-        		//(piilossa olevakortti)
-        		
-        		player.printHand();
+        			this.dealer = new Player("Dealer");
+        			System.out.println("The round is beginning, pleace place your bet");
+        			System.out.println("Your balance: " + player.getBalance());
+        			int playerBet = sc.nextInt();
+        			if (playerBet > player.getBalance()) {
+        				System.out.println("menisit töihin :D");
+        			}
+        			else {
+        				System.out.println("Bet accepted");
+        				
+        				player.addCard(deck.deal());
+        				System.out.println("You get");
+        				player.printLast();
+        				
+        				
+        				dealer.addCard(deck.deal());
+        				System.out.println("Dealer gets");
+        				dealer.printLast();
+        				
+        				player.addCard(deck.deal());
+        				System.out.println("You get");
+        				player.printLast();
+        				
+        				dealer.addCard(deck.deal());
+        				//(piilossa oleva kortti)
+        				
+        				player.printHand();
+        				
+    					System.out.println("What would you like to do?");
+    					System.out.println("Hit, Stay, Double or Split");
+        					
+        					
+    					if(sc.nextLine().equals("hit")) {
+    						player.addCard(deck.deal());
+    						player.printLast();
+    					}
+        			}
+        			
         	}
         }
 
-}
+    }
 }

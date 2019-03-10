@@ -44,11 +44,11 @@ public class Deck {
 	
 	public void shuffle() {
 		ArrayList<Card> temp = new ArrayList<Card>();
-		System.out.print(deck.size());
 		
 		while(deck.size() > 0) {
 			int indeksi = (int) (Math.random() * deck.size());
 			temp.add(deck.get(indeksi));
+			//System.out.println(temp.get(temp.size()-1).getRank().getRankValue());
 			deck.remove(indeksi);
 		}
 		

@@ -36,6 +36,11 @@ public class Player {
 		this.name = aName;
 		this.hand = new ArrayList<Card>();
 	}
+	//default constructor, to allow making a temporary player for split
+	public Player() {
+		this.name = "";
+		this.hand = new ArrayList<Card>();
+	}
 	
 	//* Lis‰‰ kortti k‰teen metodi
 	public boolean addCard(Card aCard) {

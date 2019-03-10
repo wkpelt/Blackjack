@@ -91,6 +91,10 @@ public class Player {
 		System.out.println("| " + c.getRank() + " of " + c.getSuit().getSuitString() + ", " + giveLast() + " | ");
 	}
 	
+	public Card returnLast() {
+		return hand.get(hand.size()-1);
+	}
+	
 	public int giveLast() {
 		Card c = hand.get(hand.size()-1);
 		return (c.getRank().getRankValue());

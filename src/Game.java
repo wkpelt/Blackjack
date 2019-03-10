@@ -65,13 +65,24 @@ public class Game {
         		this.dealer = new Player("Dealer");
         		System.out.println("The round is beginning set your bet");
         		int playerBet = sc.nextInt();
-        		player.addCard(deck.deal());
-        		dealer.addCard(deck.deal());
-        		player.addCard(deck.deal());
-        		dealer.addCard(deck.deal());
-        		//*kesken
-        		player.printHand();
         		
+        		player.addCard(deck.deal());
+        		System.out.println("You get");
+        		player.printLast();
+        		
+        		
+        		dealer.addCard(deck.deal());
+        		System.out.println("Dealer gets");
+        		dealer.printLast();
+        		
+        		player.addCard(deck.deal());
+        		System.out.println("You get");
+        		player.printLast();
+        		
+        		dealer.addCard(deck.deal());
+        		//(piilossa olevakortti)
+        		
+        		player.printHand();
         	}
         }
 

@@ -1,4 +1,5 @@
 import java.io.InputStream;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 import org.json.JSONObject;
@@ -17,14 +18,17 @@ public class JSONUtils {
 		return new JSONObject(getJSONStringFromFile(path));
 	}
 	
-	public static void savePlayer(String playerName, int balance) {
+	public static void savePlayer(String playerName, int balance){
 		JSONObject obj = JSONUtils.getJSONObjectFromFile("/players.json");
-		if(!JSONUtils.objectExists(playerName)) {
-			obj.put(playerName, balance);
+		obj.put(playerName, balance);
+		try{
+			FileWriter file = new FileWriter("bin/players.json");
+			file.write(obj.toString());
+			System.out.println("\nJSON Object: " + obj);
+			file.close();
 		}
-		else {
-			JSONObject player = obj.getJSONObject(playerName);
-			player.put(playerName, balance);
+		catch(Exception e) {
+			System.out.println("didnt work lol");
 		}
 	}
 	

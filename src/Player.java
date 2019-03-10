@@ -27,6 +27,10 @@ public class Player {
 	//* pelaajan käsi
 	private ArrayList<Card> hand;
 	
+	public ArrayList<Card> getHand(){
+		return hand;
+	}
+	
 	//* konstruktori
 	public Player(String aName) {
 		this.name = aName;
@@ -37,6 +41,11 @@ public class Player {
 	public boolean addCard(Card aCard) {
 		hand.add(aCard);
 		return (this.getHandSum() <= 21);
+	}
+	
+	public ArrayList<Card> clearHand(ArrayList<Card> b) {
+		b.clear();
+		return (b);
 	}
 	
 	//* Palauttaa käden arvo
@@ -68,12 +77,17 @@ public class Player {
 	public void printHand() {
 		System.out.println("You have");
 		for (Card c : hand) {
-			System.out.print("| " + c.getRank() + " of " + c.getSuit().getSuitString() + ", " + c.getRank().getRankValue() + " | ");
+			System.out.print("| " + c.getRank() + " of " + c.getSuit().getSuitString() + ", " + giveLast() + " | ");
 		}
 		System.out.println("The value of your hand is " + this.getHandSum());
 	}
 	public void printLast() {
 		Card c = hand.get(hand.size()-1);
-		System.out.println("| " + c.getRank() + " of " + c.getSuit().getSuitString() + ", " + c.getRank().getRankValue() + " | ");
+		System.out.println("| " + c.getRank() + " of " + c.getSuit().getSuitString() + ", " + giveLast() + " | ");
+	}
+	
+	public int giveLast() {
+		Card c = hand.get(hand.size()-1);
+		return (c.getRank().getRankValue());
 	}
 }

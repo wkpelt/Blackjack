@@ -63,6 +63,7 @@ public class Game {
         	}
         	if(playerCommand.equals("play")) {
         			this.dealer = new Player("Dealer");
+        			player.clearHand(player.getHand());
         			this.gameNotOver = true;
         			
         			System.out.println("The round is beginning, pleace place your bet");
@@ -96,8 +97,11 @@ public class Game {
         				
         				player.printHand();
         				
+        				System.out.println("");
+        				System.out.println(player.getHandSum() + " vs " + dealer.giveLast());
+        				
     					System.out.println("\nWhat would you like to do?");
-    					System.out.println("Hit, Stay, Double or Split");
+    					System.out.println("hit, stay, double or split");
         					
         				while(player.getHandSum() <= 21) {
         					playerCommand = sc.nextLine();
@@ -106,7 +110,11 @@ public class Game {
 	        					player.printLast();
 	        					System.out.println("Total of: " + player.getHandSum());
 	        				}
-        			}
+	        				if(player.getHandSum() > 21) {
+	        					System.out.println("BUST!");
+	        					startGame();
+	        				}
+        				}
         		}	
         	}
         }

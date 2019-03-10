@@ -63,4 +63,12 @@ public class Player {
 			
 		return handSum;
 	}
+	
+	public void printHand() {
+		System.out.println("You have");
+		for (Card c : hand) {
+			System.out.print("| " + c.getRank() + " of " + c.getSuit().getSuitString() + " | ");
+		}
+		System.out.println("The value of your hand is " + this.getHandSum());
+	}
 }

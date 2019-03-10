@@ -6,6 +6,7 @@ public class Game {
     protected String playerName;
     protected int round;
     Player player;
+    Player dealer;
     Deck deck;
     Scanner sc;
 
@@ -45,7 +46,7 @@ public class Game {
     }
 
     public void startGame() {
-        System.out.println("Set a bet by typing in a number and 'play' to start the game");
+        System.out.println("Type 'play' to start the game");
         while (true) {
         	if(deck.deckSize() <= 104) {
         		deck.shuffle();
@@ -61,7 +62,15 @@ public class Game {
         		System.out.println("Stopped");
         	}
         	if(playerCommand.equals("play")) {
-        		System.out.println("Round begins");
+        		System.out.println("The round beginning set your bet");
+        		int playerBet = sc.nextInt();
+        		player.addCard(deck.deal());
+        		dealer.addCard(deck.deal());
+        		player.addCard(deck.deal());
+        		dealer.addCard(deck.deal());
+        		//*kesken
+        		//*System.out.println("Your cards are:" + getRank())
+        		
         	}
         }
 

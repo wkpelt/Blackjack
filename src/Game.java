@@ -11,6 +11,7 @@ public class Game {
     Player dealer;
     Deck deck;
     Scanner sc;
+    
 
     public Game() {
         System.out.println("Blackjack");
@@ -48,7 +49,7 @@ public class Game {
     }
 
     public void startGame() {
-        System.out.println("Type 'play' to start the game");
+        System.out.println("Type 'play' to start the game | or 'save' to save | or 'quit' to quit playing (also saves)");
         while (true) {
         	if(deck.deckSize() <= 104) {
         		deck.shuffle();
@@ -57,6 +58,12 @@ public class Game {
         	String playerCommand = sc.nextLine();
         	if(playerCommand.equals("save") && !gameNotOver) {
         		JSONUtils.savePlayer(player.getPlayerName(),player.getBalance());
+        	}
+        	if(playerCommand.equals("quit")) {
+        		this.gameNotOver = false;
+        		JSONUtils.savePlayer(player.getPlayerName(),player.getBalance());
+        		System.exit(0);
+        		startGame();
         	}
         	if(playerCommand.equals("stop")) {
         		this.gameNotOver = false;
@@ -70,7 +77,16 @@ public class Game {
         			System.out.println("The round is beginning, please place your bet");
         			System.out.println("Your balance: " + player.getBalance());
         			
-        			int playerBet = sc.nextInt();
+        			int playerBet = 0;
+        			try 
+        			{
+        				 playerBet = sc.nextInt();        			
+        			} 
+        			catch (Exception e)
+        			{
+        				System.out.println("Illegal argument, please enter an integer value");
+        				
+        			}
         			
         			if (playerBet > player.getBalance() || player.getBalance() == 0) {
         				System.out.println("menisit töihin :D");

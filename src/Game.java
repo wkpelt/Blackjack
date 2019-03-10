@@ -62,14 +62,15 @@ public class Game {
         		System.out.println("Stopped");
         	}
         	if(playerCommand.equals("play")) {
-        		System.out.println("The round beginning set your bet");
+        		this.dealer = new Player("Dealer");
+        		System.out.println("The round is beginning set your bet");
         		int playerBet = sc.nextInt();
         		player.addCard(deck.deal());
         		dealer.addCard(deck.deal());
         		player.addCard(deck.deal());
         		dealer.addCard(deck.deal());
         		//*kesken
-        		//*System.out.println("Your cards are:" + getRank())
+        		player.printHand();
         		
         	}
         }

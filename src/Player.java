@@ -30,6 +30,7 @@ public class Player {
 	//* konstruktori
 	public Player(String aName) {
 		this.name = aName;
+		this.hand = new ArrayList<Card>();
 	}
 	
 	//* Lis‰‰ kortti k‰teen metodi

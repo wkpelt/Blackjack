@@ -62,6 +62,9 @@ public class Game {
         		this.gameNotOver = false;
         		startGame();
         	}
+        	if(playerCommand.equals("players")) {
+        		JSONUtils.givePlayers();
+        	}
         	if(playerCommand.equals("play")) {
         			this.dealer = new Player("Dealer");
         			player.clearHand(player.getHand());

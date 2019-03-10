@@ -18,6 +18,11 @@ public class JSONUtils {
 		return new JSONObject(getJSONStringFromFile(path));
 	}
 	
+	public static void givePlayers() {
+		JSONObject obj = JSONUtils.getJSONObjectFromFile("/players.json");
+		System.out.println("Players: " + obj);
+	}
+	
 	public static void savePlayer(String playerName, int balance){
 		JSONObject obj = JSONUtils.getJSONObjectFromFile("/players.json");
 		obj.put(playerName, balance);

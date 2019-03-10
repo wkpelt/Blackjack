@@ -54,6 +54,10 @@ public class Deck {
 		deck = temp;
 	}
 	
+	public int deckSize() {
+		return deck.size();
+	}
+	
 	
 	public Card deal() {
 		Card a = deck.get(0);

@@ -41,24 +41,25 @@ public class Game {
     }
 
     public void startGame() {
-        Scanner sc = new Scanner(System.in);
         System.out.println("Set a bet by typing in a number and 'play' to start the game");
         while (true) {
+        	Scanner sc = new Scanner(System.in);
         	if(deck.deckSize() <= 104) {
         		deck.shuffle();
+        		System.out.println("Shuffling the deck!");
         	}
         	if(sc.nextLine() == "save") {
+        		System.out.println("moi");
         		JSONUtils.savePlayer(player.getPlayerName(),player.getBalance());
-        	if(sc.nextLine() != "stop") {
+        	}
+        	if(sc.nextLine().equals("stop")) {
         		// pysäytä peli jos erä on loppu
         		System.out.println("Stopped");
         	}
-        	if(sc.nextLine() != "play") {
+        	if(sc.nextLine().equals("play")) {
         		System.out.println("Round begins");
-        		
         	}
         }
-    }
 
 }
 }

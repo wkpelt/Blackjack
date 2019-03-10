@@ -136,6 +136,7 @@ public class Game {
 	//Had to use this currentHand way, because we should've made a class for the hand itself
 	public void doubledown(String playerCommand, int playerBet, Player currentHand) {
 		if(playerCommand.contentEquals("double")) {
+			if(player.getBalance() >= playerBet*2) {
 			playerBet = playerBet * 2;
 			currentHand.addCard(deck.deal());
 			currentHand.printLast();
@@ -145,6 +146,7 @@ public class Game {
 				player.setBalance(player.getBalance() - playerBet);
 				startGame();
 			}
+		}
 		}
 
 	}

@@ -1,11 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.json.JSONObject;
-
 public class Game {
     protected String playerName;
-    protected int round;
     private boolean gameNotOver;
     Player player;
     Player dealer;
@@ -18,7 +15,6 @@ public class Game {
         System.out.println("What is your name?");
         this.sc = new Scanner(System.in);
         this.playerName = sc.nextLine();
-        this.round = 0;
         this.deck = new Deck();
         ifPlayerExists();
     }
@@ -44,9 +40,6 @@ public class Game {
         return playerName;
     }
 
-    public int giveRound() {
-        return round;
-    }
 
     public void startGame() {
         System.out.println("Type 'play' to start the game | or 'save' to save | or 'quit' to quit playing (also saves)");
@@ -196,7 +189,7 @@ public class Game {
 		System.out.println("Dealer hits");
 		dealer.addCard(deck.deal());
 		dealer.printLast();
-		System.out.print( "Total of " + dealer.getHandSum());
+		System.out.println( "Total of: " + dealer.getHandSum());
 	}
 	
 	public void dealerBust(int playerBet) {

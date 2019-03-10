@@ -24,11 +24,10 @@ public class JSONUtils {
 		try{
 			FileWriter file = new FileWriter("bin/players.json");
 			file.write(obj.toString());
-			System.out.println("\nJSON Object: " + obj);
 			file.close();
 		}
 		catch(Exception e) {
-			System.out.println("didnt work lol");
+			System.out.println("Couldn't find JSON file");
 		}
 	}
 	

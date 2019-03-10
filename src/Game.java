@@ -230,7 +230,7 @@ public class Game {
 	public void split(String playerCommand, Player currentHand, int playerBet) {
 		if(playerCommand.contentEquals("split")) {
 			ArrayList<Card> abc = currentHand.getHand();
-			if(abc.size() < 2 && abc.get(0).getRank() == abc.get(1).getRank()) {
+			if(abc.size() < 2 && abc.get(0).getRank().getRankValue() == abc.get(1).getRank().getRankValue()) {
 				Player temp = new Player();
 				//Can't work like this, would have to write all the logic inside here again...
 				//all of these should've been methods, RREEE more methods

@@ -30,7 +30,7 @@ public class Player {
 	//* konstruktori
 	public Player(String aName) {
 		this.name = aName;
-		hand.clear();
+		hand.clearDeck();
 	}
 	
 	//* Lis‰‰ kortti k‰teen metodi

@@ -12,7 +12,7 @@ public class Deck {
 	}
 	
 	public void createDeck() {
-		ArrayList<Card> deck = new ArrayList<Card>();
+		this.deck = new ArrayList<Card>();
 		
 		//*adds four decks
 		for (int i=0; i < 4; i++) {
@@ -44,6 +44,7 @@ public class Deck {
 	
 	public void shuffle() {
 		ArrayList<Card> temp = new ArrayList<Card>();
+		System.out.print(deck.size());
 		
 		while(deck.size() > 0) {
 			int indeksi = (int) (Math.random() * deck.size());
@@ -58,6 +59,9 @@ public class Deck {
 		return deck.size();
 	}
 	
+	public void clearDeck() {
+		deck.clear();
+	}
 	
 	public Card deal() {
 		Card a = deck.get(0);

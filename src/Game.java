@@ -7,9 +7,13 @@ public class Game {
     protected int round;
     Player player;
     Deck deck;
+    Scanner sc;
 
-    public Game(String playerName) {
-        this.playerName = playerName;
+    public Game() {
+        System.out.println("Blackjack");
+        System.out.println("What is your name?");
+        this.sc = new Scanner(System.in);
+        this.playerName = sc.nextLine();
         this.round = 0;
         this.deck = new Deck();
         ifPlayerExists();
@@ -43,20 +47,20 @@ public class Game {
     public void startGame() {
         System.out.println("Set a bet by typing in a number and 'play' to start the game");
         while (true) {
-        	Scanner sc = new Scanner(System.in);
         	if(deck.deckSize() <= 104) {
         		deck.shuffle();
         		System.out.println("Shuffling the deck!");
         	}
-        	if(sc.nextLine() == "save") {
+        	String playerCommand = sc.nextLine();
+        	if(playerCommand.equals("save")) {
         		System.out.println("moi");
         		JSONUtils.savePlayer(player.getPlayerName(),player.getBalance());
         	}
-        	if(sc.nextLine().equals("stop")) {
+        	if(playerCommand.equals("stop")) {
         		// pysäytä peli jos erä on loppu
         		System.out.println("Stopped");
         	}
-        	if(sc.nextLine().equals("play")) {
+        	if(playerCommand.equals("play")) {
         		System.out.println("Round begins");
         	}
         }

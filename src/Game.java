@@ -133,23 +133,22 @@ public class Game {
 		}
 	}
 	
-	//Had to use this currentHand way, because we should've made a class for the hand itself
-	public void doubledown(String playerCommand, int playerBet, Player currentHand) {
+	//Had to use this currentHand way. we should've made a class for the hand itself
+	public boolean doubledown(String playerCommand, int playerBet, Player currentHand) {
 		if(playerCommand.contentEquals("double")) {
 			if(player.getBalance() >= playerBet*2) {
 			playerBet = playerBet * 2;
 			currentHand.addCard(deck.deal());
 			currentHand.printLast();
 			System.out.println("You end with: " + currentHand.getHandSum());
-			if(player.getHandSum() > 21) {
-				System.out.println("BUST!");
-				player.setBalance(player.getBalance() - playerBet);
-				startGame();
+			bust(playerBet, currentHand);
+			return true;
 			}
 		}
-		}
-
+		return false;
 	}
+
+	
 	
 		
 	public boolean stay(String playerCommand) {
@@ -181,6 +180,7 @@ public class Game {
 		System.out.println("Dealer hits");
 		dealer.addCard(deck.deal());
 		dealer.printLast();
+		System.out.print( "Total of " + dealer.getHandSum());
 	}
 	
 	public void dealerBust(int playerBet) {
@@ -216,13 +216,12 @@ public class Game {
 			playerCommand = sc.nextLine();
 			split(playerCommand, currentHand, playerBet);
 			hit(playerCommand, currentHand);
-			doubledown(playerCommand, playerBet, currentHand);
-
+			if (doubledown(playerCommand, playerBet, currentHand)) {
+				break;
+			}
 			if (stay(playerCommand)) {
 				break;
 			}
-			
-			
 		}
 		bust(playerBet, currentHand);
 	}
@@ -230,7 +229,7 @@ public class Game {
 	public void split(String playerCommand, Player currentHand, int playerBet) {
 		if(playerCommand.contentEquals("split")) {
 			ArrayList<Card> abc = currentHand.getHand();
-			if(abc.size() < 2 && abc.get(0).getRank().getRankValue() == abc.get(1).getRank().getRankValue()) {
+			if(abc.get(0).getRank().getRankValue() == abc.get(1).getRank().getRankValue()) {
 				Player temp = new Player();
 				//Can't work like this, would have to write all the logic inside here again...
 				//all of these should've been methods, RREEE more methods

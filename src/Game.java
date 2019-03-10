@@ -213,7 +213,6 @@ public class Game {
 	
 	public void gameLoop(String playerCommand, Player currentHand, int playerBet) {
 		while(currentHand.getHandSum() <= 21) {
-			sc.nextLine();
 			playerCommand = sc.nextLine();
 			split(playerCommand, currentHand, playerBet);
 			hit(playerCommand, currentHand);
@@ -223,7 +222,6 @@ public class Game {
 				break;
 			}
 			
-			System.out.println("hit, stay, double or split?");
 			
 		}
 		bust(playerBet, currentHand);
@@ -247,8 +245,7 @@ public class Game {
 			}
 			else {
 				System.out.println("Split not allowed, your cards have to have the same value");
-				System.out.println("hit, stay, double or split?");
-				sc.nextLine();
+
 				gameLoop(playerCommand, currentHand, playerBet);
 			}
 			

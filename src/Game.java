@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.json.JSONObject;
@@ -66,7 +67,7 @@ public class Game {
         			player.clearHand(player.getHand());
         			this.gameNotOver = true;
         			
-        			System.out.println("The round is beginning, pleace place your bet");
+        			System.out.println("The round is beginning, please place your bet");
         			System.out.println("Your balance: " + player.getBalance());
         			
         			int playerBet = sc.nextInt();
@@ -93,90 +94,162 @@ public class Game {
         				player.printLast();
         				
         				dealer.addCard(deck.deal());
+        				System.out.println("Dealer gets a hidden card");
         				//(piilossa oleva kortti)
         				
         				player.printHand();
         				
         				System.out.println("");
-        				System.out.println(player.getHandSum() + " vs " + dealer.giveLast());
-        				
+        				System.out.println(player.getHandSum() + " vs " + dealer.giveLast() + " hidden card");
+        				twentyone(playerBet);
     					System.out.println("\nWhat would you like to do?");
     					System.out.println("hit, stay, double or split");
         					
-        				while(player.getHandSum() <= 21) {
-        					playerCommand = sc.nextLine();
-	        				if(playerCommand.equals("hit")) {
-	        					player.addCard(deck.deal());
-	        					player.printLast();
-	        					System.out.println("Total of: " + player.getHandSum());
-	        				}
-	        				if(playerCommand.contentEquals("double")) {
-	        					playerBet = playerBet * 2;
-	        					player.addCard(deck.deal());
-	        					player.printLast();
-	        					System.out.println("You end with: " + player.getHandSum());
-	        					if(player.getHandSum() > 21) {
-		        					System.out.println("BUST!");
-		        					player.setBalance(player.getBalance() - playerBet);
-		        					startGame();
-	        					}
-	        					else{ break;
-	        					}
-	        				}
-	        				if(playerCommand.contentEquals("split")) {
-	        					//* luo pelaajalle 2 uutta kättä ja jaa niihin eri kortit
-	        				}
-	        				
-	        				if(playerCommand.contentEquals("stay")) {
-	        					break;
-	        				}
-	        				if(player.getHandSum() > 21) {
-	        					System.out.println("BUST!");
-	        					player.setBalance(player.getBalance() - playerBet);
-	        					startGame();
-	        				}
-	        				if(player.getHandSum() == 21) {
-	        					System.out.println("Blackjack!");
-	        					player.setBalance(player.getBalance() + playerBet);
-	        					startGame();
-	        				}
-	        				
-        				}
+    					//Delicious readability, would've been a lot better if it had been it methods in mind from the start 
+        				//all this just to get split to work...
+    					gameLoop(playerCommand, player, playerBet);
+    					
         			System.out.println("Now it's the dealers turn");
         			dealer.printDealerHand();
         			while(dealer.getHandSum() < 17) {
-        				System.out.println("Dealer hits");
-        				dealer.addCard(deck.deal());
-        				dealer.printLast();
-        				if(dealer.getHandSum() > 21) {
-        					System.out.println("Dealer busts! You win!");
-        					player.setBalance(player.getBalance() + playerBet);
-        					startGame();
-        				}
-        				if(dealer.getHandSum() == 21) {
-        					System.out.println("Dealer blackjack!");
-        					player.setBalance(player.getBalance() - playerBet);
-        					startGame();
-        				}
+        				dealerHit();
+        				dealerBust(playerBet);
+        				dealerTwentyone(playerBet);
+        				
         			}
-        			if(dealer.getHandSum() == 21) {
-    					System.out.println("Dealer blackjack!");
-    					player.setBalance(player.getBalance() - playerBet);
-    					startGame();
-        			} else {
-        				if(player.getHandSum() > dealer.getHandSum()) {
-        					System.out.println("You win!!");
-        					player.setBalance(player.getBalance() + playerBet);
-        					startGame();
-        				}
-        				if(player.getHandSum() < dealer.getHandSum()) {
-        					System.out.println("Dealer wins!");
-        					player.setBalance(player.getBalance() - playerBet);
-        					startGame();
-        				}
-        			}
+        			//if dealer has blackjack ends the game and starts again, else checks who won
+        			dealerTwentyone(playerBet);
+        			whoWon(playerBet);
+        			
         		}	
         	}
         }
     }
+	public void hit(String playerCommand, Player playerA) {
+		if(playerCommand.equals("hit")) {
+			playerA.addCard(deck.deal());
+			playerA.printLast();
+			System.out.println("Total of: " + playerA.getHandSum());
+		}
+	}
+	
+	//Had to use this currentHand way, because we should've made a class for the hand itself
+	public void doubledown(String playerCommand, int playerBet, Player currentHand) {
+		if(playerCommand.contentEquals("double")) {
+			playerBet = playerBet * 2;
+			currentHand.addCard(deck.deal());
+			currentHand.printLast();
+			System.out.println("You end with: " + currentHand.getHandSum());
+			if(player.getHandSum() > 21) {
+				System.out.println("BUST!");
+				player.setBalance(player.getBalance() - playerBet);
+				startGame();
+			}
+		}
+
+	}
+	
+		
+	public boolean stay(String playerCommand) {
+		if(playerCommand.contentEquals("stay")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public void bust(int playerBet, Player currentHand) {
+		if(currentHand.getHandSum() > 21) {
+			System.out.println("BUST!");
+			player.setBalance(player.getBalance() - playerBet);
+			startGame();
+		}
+	}
+	
+	public void twentyone(int playerBet) {
+		if(player.getHandSum() == 21) {
+			System.out.println("Blackjack!");
+			player.setBalance(player.getBalance() + playerBet);
+			startGame();
+		}
+	}
+	
+	public void dealerHit() {
+		System.out.println("Dealer hits");
+		dealer.addCard(deck.deal());
+		dealer.printLast();
+	}
+	
+	public void dealerBust(int playerBet) {
+		if(dealer.getHandSum() > 21) {
+			System.out.println("Dealer busts! You win!");
+			player.setBalance(player.getBalance() + playerBet);
+			startGame();
+		}
+	}
+	
+	public void dealerTwentyone(int playerBet) {
+		if(dealer.getHandSum() == 21) {
+			System.out.println("Dealer blackjack!");
+			player.setBalance(player.getBalance() - playerBet);
+			startGame();
+		}
+	}
+	public void whoWon(int playerBet) {
+		if(player.getHandSum() > dealer.getHandSum()) {
+			System.out.println("You win!!");
+			player.setBalance(player.getBalance() + playerBet);
+			startGame();
+		}
+		if(player.getHandSum() < dealer.getHandSum()) {
+			System.out.println("Dealer wins!");
+			player.setBalance(player.getBalance() - playerBet);
+			startGame();
+		}
+	}
+	
+	public void gameLoop(String playerCommand, Player currentHand, int playerBet) {
+		while(currentHand.getHandSum() <= 21) {
+			sc.nextLine();
+			playerCommand = sc.nextLine();
+			split(playerCommand, currentHand, playerBet);
+			hit(playerCommand, currentHand);
+			doubledown(playerCommand, playerBet, currentHand);
+
+			if (stay(playerCommand)) {
+				break;
+			}
+			
+			System.out.println("hit, stay, double or split?");
+			
+		}
+		bust(playerBet, currentHand);
+	}
+	
+	public void split(String playerCommand, Player currentHand, int playerBet) {
+		if(playerCommand.contentEquals("split")) {
+			ArrayList<Card> abc = currentHand.getHand();
+			if(abc.size() < 2 && abc.get(0).getRank() == abc.get(1).getRank()) {
+				Player temp = new Player();
+				//Can't work like this, would have to write all the logic inside here again...
+				//all of these should've been methods, RREEE more methods
+				//did it wow this is ass tho, so much work to get this to work
+			
+			temp.addCard(currentHand.returnLast());
+			currentHand.removeCard(1);
+			hit("hit", currentHand);
+			hit("hit", temp);
+			gameLoop(playerCommand, currentHand, playerBet);
+			gameLoop(playerCommand, temp, playerBet);
+			}
+			else {
+				System.out.println("Split not allowed, your cards have to have the same value");
+				System.out.println("hit, stay, double or split?");
+				sc.nextLine();
+				gameLoop(playerCommand, currentHand, playerBet);
+			}
+			
+		}
+	}
 }

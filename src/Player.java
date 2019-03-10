@@ -86,13 +86,13 @@ public class Player {
 	public void printHand() {
 		System.out.println("You have");
 		for (Card c : hand) {
-			System.out.print("| " + c.getRank() + " of " + c.getSuit().getSuitString() + ", " + giveLast() + " | ");
+			System.out.print("| " + c.getRank() + " of " + c.getSuit().getSuitString() + ", " + c.getRank().getRankValue() + " | ");
 		}
 		System.out.println("The value of your hand is " + this.getHandSum());
 	}
 	public void printLast() {
 		Card c = hand.get(hand.size()-1);
-		System.out.println("| " + c.getRank() + " of " + c.getSuit().getSuitString() + ", " + giveLast() + " | ");
+		System.out.println("| " + c.getRank() + " of " + c.getSuit().getSuitString() + ", " + c.getRank().getRankValue() + " | ");
 	}
 	
 	public Card returnLast() {

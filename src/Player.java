@@ -48,6 +48,10 @@ public class Player {
 		return (this.getHandSum() <= 21);
 	}
 	
+	public void removeCard(int index) {
+		hand.remove(index);
+	}
+	
 	public ArrayList<Card> clearHand(ArrayList<Card> b) {
 		b.clear();
 		return (b);
@@ -93,6 +97,11 @@ public class Player {
 	
 	public Card returnLast() {
 		return hand.get(hand.size()-1);
+	}
+	
+	public void removeLast() {
+		// could just be remove(1), because used only in split and split only allowed with two cards
+		hand.remove(hand.size()-1);
 	}
 	
 	public int giveLast() {

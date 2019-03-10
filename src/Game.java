@@ -2,8 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
-    protected String playerName;
-    private boolean gameNotOver;
+    private String playerName;
     Player player;
     Player dealer;
     Deck deck;
@@ -42,50 +41,39 @@ public class Game {
 
 
     public void startGame() {
-        System.out.println("Type 'play' to start the game | or 'save' to save | or 'quit' to quit playing (also saves)");
+        System.out.println("Type 'play' to start the game | 'quit' to quit playing | 'help' for more commands.");
+        JSONUtils.savePlayer(player.getPlayerName(),player.getBalance());
         while (true) {
-        	if(deck.deckSize() <= 104) {
-        		deck.shuffle();
-        		System.out.println("Shuffling the deck!");
-        	}
         	String playerCommand = sc.nextLine();
-        	if(playerCommand.equals("save") && !gameNotOver) {
-        		JSONUtils.savePlayer(player.getPlayerName(),player.getBalance());
-        	}
         	if(playerCommand.equals("quit")) {
-        		this.gameNotOver = false;
         		JSONUtils.savePlayer(player.getPlayerName(),player.getBalance());
         		System.exit(0);
-        		startGame();
-        	}
-        	if(playerCommand.equals("stop")) {
-        		this.gameNotOver = false;
-        		startGame();
         	}
         	if(playerCommand.equals("players")) {
         		JSONUtils.givePlayers();
         	}
+        	if(playerCommand.equals("help")) {
+        		System.out.println("More commands: players");
+        	}
         	if(playerCommand.equals("play")) {
         			this.dealer = new Player("Dealer");
         			player.clearHand(player.getHand());
-        			this.gameNotOver = true;
         			
         			System.out.println("The round is beginning, please place your bet");
         			System.out.println("Your balance: " + player.getBalance());
         			
         			int playerBet = 0;
-        			try 
-        			{
-        				 playerBet = sc.nextInt();        			
-        			} 
-        			catch (Exception e)
-        			{
-        				System.out.println("Illegal argument, please enter an integer value");
-        				
-        			}
+    				try 
+    				{
+    					playerBet = sc.nextInt();        			
+    				} 
+    				catch (Exception e)
+    				{
+    					System.out.println("Illegal argument, please enter an integer value");
+    				}
         			
         			if (playerBet > player.getBalance() || player.getBalance() == 0) {
-        				System.out.println("menisit töihin :D");
+        				System.out.println("\nmenisit töihin :D");
         				startGame();
         			}
         			
@@ -95,7 +83,6 @@ public class Game {
         				player.addCard(deck.deal());
         				System.out.println("You get");
         				player.printLast();
-        				
         				
         				dealer.addCard(deck.deal());
         				System.out.println("Dealer gets");
@@ -107,7 +94,6 @@ public class Game {
         				
         				dealer.addCard(deck.deal());
         				System.out.println("Dealer gets a hidden card");
-        				//(piilossa oleva kortti)
         				
         				player.printHand();
         				
@@ -130,6 +116,10 @@ public class Game {
         				
         			}
         			//if dealer has blackjack ends the game and starts again, else checks who won
+                	if(deck.deckSize() <= 104) {
+                		deck.shuffle();
+                		System.out.println("Shuffling the deck!");
+                	}
         			dealerTwentyone(playerBet);
         			whoWon(playerBet);
         			

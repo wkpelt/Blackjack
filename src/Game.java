@@ -100,7 +100,7 @@ public class Game {
         				player.printHand();
         				
         				System.out.println("");
-        				System.out.println(player.getHandSum() + " vs " + dealer.giveLast() + " hidden card");
+        				System.out.println(player.getHandSum() + " vs " + dealer.giveFirst() + " and a hidden card");
         				twentyone(playerBet);
     					System.out.println("\nWhat would you like to do?");
     					System.out.println("hit, stay, double or split");

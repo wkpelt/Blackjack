@@ -104,6 +104,11 @@ public class Player {
 		hand.remove(hand.size()-1);
 	}
 	
+	public int giveFirst() {
+		Card c = hand.get(0);
+		return (c.getRank().getRankValue());
+	}
+	
 	public int giveLast() {
 		Card c = hand.get(hand.size()-1);
 		return (c.getRank().getRankValue());
@@ -111,7 +116,7 @@ public class Player {
 	public void printDealerHand() {
 		System.out.println("Dealer has");
 		for (Card c : hand) {
-			System.out.print("| " + c.getRank() + " of " + c.getSuit().getSuitString() + ", " + giveLast() + " | ");
+			System.out.print("| " + c.getRank() + " of " + c.getSuit().getSuitString() + ", " + c.getRank().getRankValue() + " | ");
 		}
 		System.out.println("The value of the dealer's hand is " + this.getHandSum());
 	}

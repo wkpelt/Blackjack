@@ -110,11 +110,71 @@ public class Game {
 	        					player.printLast();
 	        					System.out.println("Total of: " + player.getHandSum());
 	        				}
+	        				if(playerCommand.contentEquals("double")) {
+	        					playerBet = playerBet * 2;
+	        					player.addCard(deck.deal());
+	        					player.printLast();
+	        					System.out.println("You end with: " + player.getHandSum());
+	        					if(player.getHandSum() > 21) {
+		        					System.out.println("BUST!");
+		        					player.setBalance(player.getBalance() - playerBet);
+		        					startGame();
+	        					}
+	        					else{ break;
+	        					}
+	        				}
+	        				if(playerCommand.contentEquals("split")) {
+	        					//* luo pelaajalle 2 uutta kättä ja jaa niihin eri kortit
+	        				}
+	        				
+	        				if(playerCommand.contentEquals("stay")) {
+	        					break;
+	        				}
 	        				if(player.getHandSum() > 21) {
 	        					System.out.println("BUST!");
+	        					player.setBalance(player.getBalance() - playerBet);
 	        					startGame();
 	        				}
+	        				if(player.getHandSum() == 21) {
+	        					System.out.println("Blackjack!");
+	        					player.setBalance(player.getBalance() + playerBet);
+	        					startGame();
+	        				}
+	        				
         				}
+        			System.out.println("Now it's the dealers turn");
+        			dealer.printDealerHand();
+        			while(dealer.getHandSum() < 17) {
+        				System.out.println("Dealer hits");
+        				dealer.addCard(deck.deal());
+        				dealer.printLast();
+        				if(dealer.getHandSum() > 21) {
+        					System.out.println("Dealer busts! You win!");
+        					player.setBalance(player.getBalance() + playerBet);
+        					startGame();
+        				}
+        				if(dealer.getHandSum() == 21) {
+        					System.out.println("Dealer blackjack!");
+        					player.setBalance(player.getBalance() - playerBet);
+        					startGame();
+        				}
+        			}
+        			if(dealer.getHandSum() == 21) {
+    					System.out.println("Dealer blackjack!");
+    					player.setBalance(player.getBalance() - playerBet);
+    					startGame();
+        			} else {
+        				if(player.getHandSum() > dealer.getHandSum()) {
+        					System.out.println("You win!!");
+        					player.setBalance(player.getBalance() + playerBet);
+        					startGame();
+        				}
+        				if(player.getHandSum() < dealer.getHandSum()) {
+        					System.out.println("Dealer wins!");
+        					player.setBalance(player.getBalance() - playerBet);
+        					startGame();
+        				}
+        			}
         		}	
         	}
         }

@@ -53,10 +53,14 @@ public class Game {
         		JSONUtils.givePlayers();
         	}
         	if(playerCommand.equals("help")) {
-        		System.out.println("More commands: players, balance");
+        		System.out.println("More commands: players, balance, cardsleft");
         	}
         	if(playerCommand.equals("balance")) {
         		System.out.println(player.getBalance());
+        	}
+        	if(playerCommand.equals("cardsleft")) {
+        		int cardsLeft = deck.deckSize();
+        		System.out.println("Cards left in the deck: " + cardsLeft);
         	}
         	if(playerCommand.equals("play")) {
         			this.dealer = new Player("Dealer");
@@ -118,11 +122,11 @@ public class Game {
         				dealerTwentyone(playerBet);
         				
         			}
-        			//if dealer has blackjack ends the game and starts again, else checks who won
                 	if(deck.deckSize() <= 104) {
                 		deck.shuffle();
                 		System.out.println("Shuffling the deck!");
                 	}
+                	//if dealer has blackjack ends the game and starts again, else checks who won
         			dealerTwentyone(playerBet);
         			whoWon(playerBet);
         			

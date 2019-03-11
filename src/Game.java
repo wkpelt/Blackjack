@@ -149,7 +149,11 @@ public class Game {
 			bust(playerBet, currentHand);
 			return true;
 			}
-		}
+			else {
+			 System.out.println("Not enough balance");
+			 return false;
+			}
+		};
 		return false;
 	}
 

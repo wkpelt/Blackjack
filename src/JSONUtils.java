@@ -26,8 +26,8 @@ public class JSONUtils {
 	public static void savePlayer(String playerName, int balance){
 		JSONObject obj = JSONUtils.getJSONObjectFromFile("/players.json");
 		obj.put(playerName, balance);
-		try{
-			FileWriter file = new FileWriter("bin/players.json");
+		
+		try(FileWriter file = new FileWriter("bin/players.json")){
 			file.write(obj.toString());
 			file.close();
 		}

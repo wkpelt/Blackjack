@@ -53,7 +53,10 @@ public class Game {
         		JSONUtils.givePlayers();
         	}
         	if(playerCommand.equals("help")) {
-        		System.out.println("More commands: players");
+        		System.out.println("More commands: players, balance");
+        	}
+        	if(playerCommand.equals("balance")) {
+        		System.out.println(player.getBalance());
         	}
         	if(playerCommand.equals("play")) {
         			this.dealer = new Player("Dealer");
